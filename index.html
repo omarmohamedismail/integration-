@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#bfa6ff">
+<meta name="description" content="Integration rules with worked examples: basic, trigonometric, hyperbolic and inverse forms.">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Integrals">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<title>Integration Rules · قوانين التكامل</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Cairo:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:linear-gradient(150deg,#e8d0ff 0%,#bfa6ff 46%,#8c6dff 100%);--ink:#1d0f45;--mute:#4a3a86;--g1:#4c1d95;--g2:#a21caf;--glass:rgba(200,170,255,.75);--wd:#09060f;--wd2:#130c26;--wl:rgba(167,139,250,.22);--wi:#f3eeff;--wm:#9a91bd}
+:root[data-theme="dark"]{--bg:linear-gradient(150deg,#0c0720 0%,#1d0f4b 55%,#3a1b8c 100%);--ink:#f0eaff;--mute:#a99fd6;--g1:#c4b5fd;--g2:#f0abfc;--glass:rgba(12,7,32,.75);color-scheme:dark}
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-behavior:smooth;scroll-padding-top:calc(env(safe-area-inset-top,0px) + 100px)}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;color:var(--ink);font:400 16px/1.55 Inter,system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
+body::after{content:"";position:fixed;inset:0;z-index:-1;background:var(--bg)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--glass);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);z-index:30}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+#pg{position:fixed;top:env(safe-area-inset-top,0px);left:0;right:0;height:3px;z-index:40;background:linear-gradient(90deg,#8b5cf6,#d946ef);transform:scaleX(0);transform-origin:0 50%}
+.wrap{max-width:1180px;margin:0 auto;padding:0 22px}
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;padding-top:10px}
+.top .wrap{padding:0}
+.bar{display:flex;align-items:center;gap:10px;height:62px;padding:0 12px;background:rgba(9,6,15,.88);border:1px solid var(--wl);border-radius:22px;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);box-shadow:0 20px 40px -22px rgba(25,5,70,.9)}
+.logo{display:grid;place-items:center;width:38px;height:38px;border-radius:12px;background:linear-gradient(135deg,#8b6bff,#d946ef);color:#fff;font:italic 700 23px Georgia,serif;flex:none;box-shadow:0 0 22px -4px #8b5cf6}
+.brand{font-weight:700;letter-spacing:-.02em;white-space:nowrap;color:var(--wi);margin-right:6px}
+.search{flex:1;position:relative;min-width:0}
+.search input{width:100%;height:40px;border-radius:13px;border:1px solid var(--wl);background:rgba(255,255,255,.05);color:var(--wi);padding:0 46px 0 16px;font:inherit;font-size:15px;outline:none;transition:.15s}
+.search input::placeholder{color:var(--wm)}
+.search input:focus{border-color:#a78bfa;box-shadow:0 0 0 3px rgba(139,92,246,.3)}
+.search kbd{position:absolute;right:11px;top:50%;transform:translateY(-50%);font:600 12px Inter,sans-serif;color:var(--wm);border:1px solid var(--wl);border-radius:6px;padding:1px 7px;pointer-events:none}
+.btn{height:40px;padding:0 15px;border-radius:13px;border:1px solid var(--wl);background:rgba(255,255,255,.05);color:var(--wi);font:600 14px Inter,sans-serif;cursor:pointer;flex:none;transition:.15s;white-space:nowrap}
+.btn:hover{border-color:#a78bfa}
+.btn.on{background:linear-gradient(180deg,#8b6bff,#6d4ae0);border-color:transparent;box-shadow:0 8px 20px -8px #8b5cf6}
+.hero{padding:54px 0 36px}
+.kick{display:inline-flex;gap:9px;align-items:center;font-size:13px;font-weight:600;color:var(--ink);border:1px solid rgba(255,255,255,.45);background:rgba(255,255,255,.28);padding:6px 14px;border-radius:99px}
+.kick b{width:7px;height:7px;border-radius:50%;background:#22c55e;box-shadow:0 0 10px #22c55e}
+h1{margin:18px 0 0;font-size:clamp(2.7rem,8vw,5.2rem);line-height:.98;letter-spacing:-.05em;font-weight:800}
+h1 span{background:linear-gradient(110deg,var(--g1),var(--g2),var(--g1));background-size:240% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:sh 9s linear infinite}
+@keyframes sh{to{background-position:-240% 0}}
+.ar{font:700 clamp(1.4rem,3.6vw,2rem)/1.4 Cairo,Inter,sans-serif;color:var(--mute);margin:10px 0 28px}
+.w{background:linear-gradient(180deg,var(--wd2),var(--wd) 65%);border:1px solid var(--wl);border-radius:28px;color:var(--wi);padding:18px;position:relative;overflow:hidden;box-shadow:0 30px 60px -30px rgba(25,5,70,.9),inset 0 1px 0 rgba(255,255,255,.05)}
+.wh{display:flex;justify-content:space-between;align-items:baseline;font-size:13px;font-weight:600}
+.wh em{font-style:normal;color:var(--wm);font-size:12px;font-weight:500}
+.bento{display:grid;grid-template-columns:1fr 1.2fr 1fr;grid-template-areas:"r f b" "s f b";gap:16px}
+.ring{grid-area:r}.feat{grid-area:f;padding:0;display:flex;flex-direction:column}.stu{grid-area:s}.bars{grid-area:b}
+.stu p{margin:8px 0 0;color:var(--wm);font-size:13.5px}
+#ring svg{display:block;width:min(100%,168px);margin:6px auto 0}
+.rn{font:800 34px Inter,sans-serif;fill:#fff}.rl{font:500 10px Inter,sans-serif;fill:#9a91bd}
+#ter svg{display:block;width:100%;height:auto;background:radial-gradient(70% 60% at 50% 100%,rgba(139,92,246,.4),transparent)}
+.fb{display:flex;align-items:center;gap:6px;padding:8px 12px 0}
+.fc{flex:1;text-align:center;min-width:0}
+.fc h3{margin:0;font-size:21px;letter-spacing:-.01em}
+.fc small{display:block;color:var(--wm);font-size:12.5px;margin:2px 0 12px}
+#fm{font-size:1.12em;overflow-x:auto;padding:6px 0;min-height:60px}
+.fb>button{width:34px;height:34px;border-radius:50%;border:1px solid var(--wl);background:transparent;color:var(--wm);cursor:pointer;font-size:18px;flex:none}
+.fb>button:hover{color:#fff;border-color:#a78bfa}
+.pill{display:block;text-align:center;text-decoration:none;border:0;cursor:pointer;color:#fff;font:600 14px Inter,sans-serif;padding:13px 18px;border-radius:14px;background:linear-gradient(180deg,#8b6bff,#6d4ae0);box-shadow:0 10px 24px -10px #8b5cf6,inset 0 1px 0 rgba(255,255,255,.25);width:100%}
+.feat .pill{width:auto;margin:auto 16px 18px}
+.stu .pill{margin-top:14px}
+#bars{display:flex;align-items:flex-end;justify-content:space-between;gap:8px;height:240px;padding-top:34px}
+#bars a{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;text-decoration:none;color:var(--wm);font-size:11px;gap:9px}
+#bars i{position:relative;display:block;width:100%;max-width:34px;height:calc(var(--v)*170px);border-radius:9px;background:#2a2150;transition:.25s}
+#bars a.hi i{background:linear-gradient(180deg,#b79cff,#7c4dff);box-shadow:0 0 24px -2px #8b5cf6}
+#bars a.hi i::after{content:attr(data-n);position:absolute;top:-31px;left:50%;transform:translateX(-50%);background:#0a0714;border:1px solid var(--wl);padding:2px 9px;border-radius:9px;font:600 12px Inter,sans-serif;color:#fff}
+.layout{display:grid;grid-template-columns:236px 1fr;gap:30px;align-items:start;padding-bottom:20px}
+nav{position:sticky;top:calc(env(safe-area-inset-top,0px) + 92px);display:grid;gap:4px;background:var(--wd);border:1px solid var(--wl);border-radius:24px;padding:10px;box-shadow:0 24px 50px -28px rgba(25,5,70,.9)}
+nav a{display:flex;align-items:center;gap:11px;text-decoration:none;color:var(--wm);font-size:14.5px;font-weight:600;padding:8px 10px;border-radius:14px;transition:.15s}
+nav a i{width:32px;height:32px;border-radius:10px;display:grid;place-items:center;font:700 12px Inter,sans-serif;font-style:normal;background:hsl(var(--h) 90% 60%/.16);color:hsl(var(--h) 95% 78%);flex:none}
+nav a em{margin-left:auto;font-style:normal;font-size:12px;opacity:.8}
+nav a:hover{color:#fff}
+nav a.on{background:linear-gradient(180deg,rgba(139,107,255,.38),rgba(109,74,224,.22));color:#fff;box-shadow:inset 0 0 0 1px rgba(167,139,250,.45)}
+section{padding-bottom:42px}
+.sh{display:flex;align-items:center;gap:14px;margin:0 0 18px}
+.g{width:50px;height:50px;border-radius:16px;display:grid;place-items:center;font:700 14px Inter,sans-serif;flex:none;background:var(--wd);color:hsl(var(--h) 95% 80%);border:1px solid hsl(var(--h) 90% 70%/.55);box-shadow:0 0 26px -4px hsl(var(--h) 90% 60%/.75),inset 0 0 14px -6px hsl(var(--h) 90% 70%)}
+.sh h2{margin:0;font-size:1.55rem;letter-spacing:-.025em;line-height:1.2}
+.sh small{display:block;font:600 1.02rem Cairo,Inter,sans-serif;color:var(--mute)}
+.sh .c{margin-inline-start:auto;font:600 12px ui-monospace,Menlo,monospace;color:hsl(var(--h) 95% 80%);background:var(--wd);padding:5px 12px;border-radius:99px;border:1px solid var(--wl)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,330px),1fr));gap:14px}
+.card{--a:hsl(var(--h) 95% 76%);position:relative;min-width:0;background:linear-gradient(180deg,var(--wd2),var(--wd) 70%);color:var(--wi);border:1px solid var(--wl);border-radius:24px;padding:16px 18px 20px;overflow:hidden;opacity:0;transform:translateY(18px);transition:opacity .55s,transform .55s,border-color .2s,box-shadow .2s;box-shadow:0 24px 50px -30px rgba(25,5,70,.9)}
+.card.in{opacity:1;transform:none}
+.card::before{content:"";position:absolute;inset:0 0 auto;height:1px;background:linear-gradient(90deg,transparent,var(--a),transparent);opacity:.8}
+.card:hover{border-color:hsl(var(--h) 90% 66%/.7);box-shadow:0 0 38px -10px hsl(var(--h) 90% 60%/.85)}
+.ct{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:6px}
+.ct h3{margin:0;font-size:11.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--a)}
+.cp{border:1px solid var(--wl);background:transparent;color:var(--wm);border-radius:9px;font:600 12px Inter,sans-serif;padding:4px 10px;cursor:pointer;transition:.15s;flex:none}
+.cp:hover{color:var(--a);border-color:var(--a)}
+.cp.ok{color:#4ade80;border-color:#4ade80}
+.f{display:flex;flex-wrap:wrap;align-items:center;gap:4px 12px;min-height:64px;opacity:0;transition:opacity .5s}
+body.ready .f{opacity:1}
+.m{display:inline-block}.f .katex{font-size:1.3em}.exb .katex{font-size:1.06em}
+.m:empty::before{content:attr(data-t);font:12px ui-monospace,Menlo,monospace;color:var(--wm)}
+.rhs{transition:filter .35s,opacity .35s}
+body.study .card:not(.show) .rhs{filter:blur(9px);opacity:.55}
+body.study .card{cursor:pointer}
+.note{display:inline-block;margin-top:10px;font-size:12.5px;color:var(--a);background:hsl(var(--h) 90% 60%/.16);border-radius:8px;padding:2px 10px}
+.ex{margin-top:14px;border-top:1px dashed var(--wl);padding-top:11px}
+.ex summary{cursor:pointer;font-size:12.5px;font-weight:700;color:var(--a);list-style:none}
+.ex summary::-webkit-details-marker{display:none}
+.ex summary::before{content:"▸ "}.ex[open] summary::before{content:"▾ "}
+.exb{margin-top:8px;color:#cfc6f5;line-height:2.2;overflow-x:auto}
+body.study .card:not(.show) .ex{display:none}
+.hint{display:none;margin:0 0 22px;padding:11px 16px;border-radius:16px;background:var(--wd);border:1px solid var(--wl);color:var(--wi);font-size:14px}
+body.study .hint{display:block}
+.empty{display:none;text-align:center;color:var(--mute);padding:80px 0}
+footer{color:var(--mute);font-size:13px;text-align:center;padding:40px 0 48px}
+@media (max-width:1000px){.bento{grid-template-columns:1fr 1fr;grid-template-areas:"f f" "r s" "b b"}}
+@media (max-width:900px){
+.hero{padding:40px 0 28px}
+.layout{grid-template-columns:1fr;gap:0}
+nav{position:sticky;top:calc(env(safe-area-inset-top,0px) + 82px);z-index:15;display:flex;gap:8px;overflow-x:auto;margin:0 0 22px;padding:8px;scrollbar-width:none}
+nav::-webkit-scrollbar{display:none}
+nav a{flex:none;padding:5px 12px 5px 6px}
+nav a i{width:26px;height:26px;border-radius:8px}
+nav a em{display:none}
+}
+@media (max-width:560px){.brand,.search kbd{display:none}.wrap{padding:0 14px}.bento{grid-template-columns:1fr;grid-template-areas:"f" "r" "s" "b"}.sh .c{display:none}}
+</style>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" onload="go()"></script>
+</head>
+<body>
+<div id="pg"></div>
+<header class="top"><div class="wrap"><div class="bar">
+<div class="logo">∫</div><span class="brand">Integration Rules</span>
+<div class="search"><input id="q" type="search" placeholder="Search: tangent, sinh, arctan…" autocomplete="off"><kbd>/</kbd></div>
+<button class="btn" id="ins" hidden>Install app</button><button class="btn" id="qz">Study mode</button><button class="btn" id="th" aria-label="Toggle theme">◐</button>
+</div></div></header>
+<main class="wrap">
+<div class="hero">
+<span class="kick"><b></b>Calculus · Integration</span>
+<h1>Integration <span>Rules</span></h1>
+<p class="ar" lang="ar" dir="rtl">قوانين التكامل</p>
+<div class="bento">
+<div class="w ring"><div class="wh"><span>Library</span><em>6 groups</em></div><div id="ring"></div></div>
+<div class="w feat"><div id="ter"></div>
+<div class="fb"><button id="fp" aria-label="Previous">‹</button><div class="fc"><h3 id="ft"></h3><small id="fs"></small><div class="m" id="fm"></div></div><button id="fn" aria-label="Next">›</button></div>
+<a class="pill" href="#basic">Browse the rules</a></div>
+<div class="w stu"><div class="wh"><span>Study mode</span><em>Self test</em></div><p>Blur every answer, tap a card to reveal it.</p><button class="pill" id="qz2">Start practising</button></div>
+<div class="w bars"><div class="wh"><span>Rules per group</span><em>Tap a bar</em></div><div id="bars"></div></div>
+</div></div>
+<div class="layout"><nav id="nav"></nav><div>
+<div class="hint">Study mode: answers are blurred. Tap a card to reveal it.</div>
+<div id="main"></div><div class="empty" id="empty">No rules match your search.</div></div></div>
+</main>
+<footer>Every rule assumes u is a function of x, with u′ = du/dx.</footer>
+<script>
+const RAW=String.raw`
+# basic§Basic & Exponential§القوانين الأساسية والأسية§uⁿ§262
+Power rule§u' \cdot u^n§\frac{u^{n+1}}{n+1}§n \neq -1
+Logarithmic§\frac{u'}{u}§\ln|u|
+Reciprocal root§\frac{u'}{\sqrt{u}}§2\sqrt{u}
+Root rule§u' \cdot \sqrt{u}§\frac{2}{3} u^{3/2}
+Natural exponential§u' \cdot e^u§e^u
+General exponential§u' \cdot a^u§\frac{a^u}{\ln(a)}
+# trig§Trigonometric§تكامل الدوال المثلثية§sin§276
+Sine§u' \sin(u)§-\cos(u)
+Cosine§u' \cos(u)§\sin(u)
+Secant squared§u' \sec^2(u)§\tan(u)
+Cosecant squared§u' \csc^2(u)§-\cot(u)
+Secant · tangent§u' \sec(u)\tan(u)§\sec(u)
+Cosecant · cotangent§u' \csc(u)\cot(u)§-\csc(u)
+Tangent§u' \tan(u)§\ln|\sec(u)|
+Cotangent§u' \cot(u)§\ln|\sin(u)|
+Secant§u' \sec(u)§\ln|\sec(u) + \tan(u)|
+Cosecant§u' \csc(u)§\ln|\csc(u) - \cot(u)|
+# hyper§Hyperbolic§تكامل الدوال الزائدية§sinh§290
+Hyperbolic sine§u' \sinh(u)§\cosh(u)
+Hyperbolic cosine§u' \cosh(u)§\sinh(u)
+Sech squared§u' \operatorname{sech}^2(u)§\tanh(u)
+Csch squared§u' \operatorname{csch}^2(u)§-\coth(u)
+Sech · tanh§u' \operatorname{sech}(u)\tanh(u)§-\operatorname{sech}(u)
+Csch · coth§u' \operatorname{csch}(u)\coth(u)§-\operatorname{csch}(u)
+Hyperbolic tangent§u' \tanh(u)§\ln|\cosh(u)|
+Hyperbolic cotangent§u' \coth(u)§\ln|\sinh(u)|
+Hyperbolic secant§u' \operatorname{sech}(u)§\tan^{-1}(\sinh(u))
+Hyperbolic cosecant§u' \operatorname{csch}(u)§\ln\left|\tanh\left(\frac{u}{2}\right)\right|
+# invtrig§Inverse Trigonometric§المثلثية العكسية§sin⁻¹§304
+Arcsine form§\frac{u'}{\sqrt{a^2 - u^2}}§\sin^{-1}\left(\frac{u}{a}\right)
+Arctangent form§\frac{u'}{a^2 + u^2}§\frac{1}{a} \tan^{-1}\left(\frac{u}{a}\right)
+Arcsecant form§\frac{u'}{u\sqrt{u^2 - a^2}}§\frac{1}{a} \sec^{-1}\left(\frac{u}{a}\right)
+# invhyp§Inverse Hyperbolic§الزائدية العكسية§sinh⁻¹§316
+Inverse sinh form§\frac{u'}{\sqrt{a^2 + u^2}}§\sinh^{-1}\left(\frac{u}{a}\right)
+Inverse cosh form§\frac{u'}{\sqrt{u^2 - a^2}}§\cosh^{-1}\left(\frac{u}{a}\right)
+Inverse tanh form§\frac{u'}{a^2 - u^2}§\frac{1}{a} \tanh^{-1}\left(\frac{u}{a}\right)§u^2 < a^2
+Inverse coth form§\frac{u'}{a^2 - u^2}§\frac{1}{a} \coth^{-1}\left(\frac{u}{a}\right)§u^2 > a^2
+Inverse sech form§\frac{u'}{u\sqrt{a^2 - u^2}}§-\frac{1}{a} \operatorname{sech}^{-1}\left(\frac{u}{a}\right)
+Inverse csch form§\frac{u'}{u\sqrt{a^2 + u^2}}§-\frac{1}{a} \operatorname{csch}^{-1}\left(\frac{u}{a}\right)
+# ident§Useful Identities§متطابقات هامة للتكامل§≡§250§id
+Pythagorean§\sin^2(x) + \cos^2(x) = 1
+Double angle · sine§\sin(2x) = 2\sin(x)\cos(x)
+Sine power reduction§\sin^2(x) = \frac{1}{2}(1 - \cos(2x))
+Cosine power reduction§\cos^2(x) = \frac{1}{2}(1 + \cos(2x))
+Hyperbolic Pythagorean§\cosh^2(x) - \sinh^2(x) = 1
+Double angle · sinh§\sinh(2x) = 2\sinh(x)\cosh(x)
+Sinh power reduction§\sinh^2(x) = \frac{1}{2}(\cosh(2x) - 1)
+Cosh power reduction§\cosh^2(x) = \frac{1}{2}(\cosh(2x) + 1)
+Sinh definition§\sinh(x) = \frac{e^x - e^{-x}}{2}
+Cosh definition§\cosh(x) = \frac{e^x + e^{-x}}{2}
+`;
+const EX={};String.raw`Power rule§u=x^2+1,\; u'=2x§\int 2x(x^2+1)^3\,dx=\frac{(x^2+1)^4}{4}+c
+Logarithmic§u=x^2+1,\; u'=2x§\int\frac{2x}{x^2+1}\,dx=\ln|x^2+1|+c
+Reciprocal root§u=x^2+1,\; u'=2x§\int\frac{2x}{\sqrt{x^2+1}}\,dx=2\sqrt{x^2+1}+c
+Root rule§u=x^2+1,\; u'=2x§\int 2x\sqrt{x^2+1}\,dx=\frac{2}{3}(x^2+1)^{3/2}+c
+Natural exponential§u=x^2,\; u'=2x§\int 2x\,e^{x^2}\,dx=e^{x^2}+c
+General exponential§u=x^2,\; u'=2x,\; a=3§\int 2x\cdot 3^{x^2}\,dx=\frac{3^{x^2}}{\ln 3}+c
+Sine§u=x^2,\; u'=2x§\int 2x\sin(x^2)\,dx=-\cos(x^2)+c
+Cosine§u=3x,\; u'=3§\int 3\cos(3x)\,dx=\sin(3x)+c
+Secant squared§u=2x,\; u'=2§\int 2\sec^2(2x)\,dx=\tan(2x)+c
+Cosecant squared§u=x^2,\; u'=2x§\int 2x\csc^2(x^2)\,dx=-\cot(x^2)+c
+Secant · tangent§u=3x,\; u'=3§\int 3\sec(3x)\tan(3x)\,dx=\sec(3x)+c
+Cosecant · cotangent§u=2x,\; u'=2§\int 2\csc(2x)\cot(2x)\,dx=-\csc(2x)+c
+Tangent§u=x^2,\; u'=2x§\int 2x\tan(x^2)\,dx=\ln|\sec(x^2)|+c
+Cotangent§u=2x,\; u'=2§\int 2\cot(2x)\,dx=\ln|\sin(2x)|+c
+Secant§u=3x,\; u'=3§\int 3\sec(3x)\,dx=\ln|\sec(3x)+\tan(3x)|+c
+Cosecant§u=2x,\; u'=2§\int 2\csc(2x)\,dx=\ln|\csc(2x)-\cot(2x)|+c
+Hyperbolic sine§u=x^2,\; u'=2x§\int 2x\sinh(x^2)\,dx=\cosh(x^2)+c
+Hyperbolic cosine§u=3x,\; u'=3§\int 3\cosh(3x)\,dx=\sinh(3x)+c
+Sech squared§u=2x,\; u'=2§\int 2\operatorname{sech}^2(2x)\,dx=\tanh(2x)+c
+Csch squared§u=3x,\; u'=3§\int 3\operatorname{csch}^2(3x)\,dx=-\coth(3x)+c
+Sech · tanh§u=2x,\; u'=2§\int 2\operatorname{sech}(2x)\tanh(2x)\,dx=-\operatorname{sech}(2x)+c
+Csch · coth§u=x^2,\; u'=2x§\int 2x\operatorname{csch}(x^2)\coth(x^2)\,dx=-\operatorname{csch}(x^2)+c
+Hyperbolic tangent§u=x^2,\; u'=2x§\int 2x\tanh(x^2)\,dx=\ln|\cosh(x^2)|+c
+Hyperbolic cotangent§u=2x,\; u'=2§\int 2\coth(2x)\,dx=\ln|\sinh(2x)|+c
+Hyperbolic secant§u=x,\; u'=1§\int\operatorname{sech}(x)\,dx=\tan^{-1}(\sinh(x))+c
+Hyperbolic cosecant§u=x,\; u'=1§\int\operatorname{csch}(x)\,dx=\ln\left|\tanh\left(\frac{x}{2}\right)\right|+c
+Arcsine form§u=x,\; a=3§\int\frac{dx}{\sqrt{9-x^2}}=\sin^{-1}\left(\frac{x}{3}\right)+c
+Arctangent form§u=x,\; a=2§\int\frac{dx}{4+x^2}=\frac{1}{2}\tan^{-1}\left(\frac{x}{2}\right)+c
+Arcsecant form§u=x,\; a=2§\int\frac{dx}{x\sqrt{x^2-4}}=\frac{1}{2}\sec^{-1}\left(\frac{x}{2}\right)+c
+Inverse sinh form§u=x,\; a=3§\int\frac{dx}{\sqrt{9+x^2}}=\sinh^{-1}\left(\frac{x}{3}\right)+c
+Inverse cosh form§u=x,\; a=2§\int\frac{dx}{\sqrt{x^2-4}}=\cosh^{-1}\left(\frac{x}{2}\right)+c
+Inverse tanh form§u=x,\; a=2,\; x^2<4§\int\frac{dx}{4-x^2}=\frac{1}{2}\tanh^{-1}\left(\frac{x}{2}\right)+c
+Inverse coth form§u=x,\; a=2,\; x^2>4§\int\frac{dx}{4-x^2}=\frac{1}{2}\coth^{-1}\left(\frac{x}{2}\right)+c
+Inverse sech form§u=x,\; a=3§\int\frac{dx}{x\sqrt{9-x^2}}=-\frac{1}{3}\operatorname{sech}^{-1}\left(\frac{x}{3}\right)+c
+Inverse csch form§u=x,\; a=2§\int\frac{dx}{x\sqrt{4+x^2}}=-\frac{1}{2}\operatorname{csch}^{-1}\left(\frac{x}{2}\right)+c
+Sine power reduction§\text{Use it to integrate}§\int\sin^2(x)\,dx=\frac{x}{2}-\frac{\sin(2x)}{4}+c
+Cosine power reduction§\text{Use it to integrate}§\int\cos^2(x)\,dx=\frac{x}{2}+\frac{\sin(2x)}{4}+c
+Sinh power reduction§\text{Use it to integrate}§\int\sinh^2(x)\,dx=\frac{\sinh(2x)}{4}-\frac{x}{2}+c
+Cosh power reduction§\text{Use it to integrate}§\int\cosh^2(x)\,dx=\frac{\sinh(2x)}{4}+\frac{x}{2}+c`.split('\n').forEach(l=>{const p=l.split('§');EX[p[0]]=[p[1],p[2]]});
+const e=s=>s.replace(/&/g,'&amp;').replace(/</g,'&lt;'),S=[],L=[];
+RAW.trim().split('\n').forEach(l=>{l=l.trim();if(!l)return;if(l[0]=='#'){const p=l.slice(1).trim().split('§');S.push({id:p[0],en:p[1],ar:p[2],g:p[3],h:p[4],k:p[5]=='id',items:[]})}else S[S.length-1].items.push(l.split('§'))});
+let html='',nav='',total=0;
+S.forEach(s=>{
+  nav+=`<a href="#${s.id}" data-s="${s.id}" style="--h:${s.h}"><i>${s.g}</i>${e(s.en)}<em>${s.items.length}</em></a>`;
+  html+=`<section id="${s.id}" style="--h:${s.h}"><div class="sh"><div class="g">${s.g}</div><div><h2>${e(s.en)}</h2><small lang="ar" dir="rtl">${s.ar}</small></div><span class="c">${s.items.length} ${s.k?'identities':'rules'}</span></div><div class="grid">`;
+  s.items.forEach(it=>{
+    total++;
+    const tex=s.k?it[1]:`\\int ${it[1]} \\, dx = ${it[2]} + c`;
+    L.push(tex);
+    const M=(t,c='')=>`<span class="m ${c}" data-t="${e(t)}"></span>`,x=EX[it[0]];
+    const body=s.k?M('\\displaystyle '+it[1]):M('\\displaystyle \\int '+it[1]+'\\,dx =')+M('\\displaystyle '+it[2]+' + c','rhs');
+    html+=`<article class="card" data-q="${e((it[0]+' '+it[1]+' '+(it[2]||'')).toLowerCase())}"><div class="ct"><h3>${e(it[0])}</h3><button class="cp" data-i="${L.length-1}">Copy LaTeX</button></div><div class="f">${body}</div>${x?`<details class="ex"><summary>Worked example</summary><div class="exb">${M(x[0])}<br>${M('\\displaystyle '+x[1])}</div></details>`:''}${it[3]?`<span class="note">${M(it[3])}</span>`:''}</article>`;
+  });
+  html+='</div></section>';
+});
+const $=id=>document.getElementById(id);
+$('main').innerHTML=html;$('nav').innerHTML=nav;
+widgets();
+function go(){document.querySelectorAll('.m').forEach(el=>{try{katex.render(el.dataset.t,el,{throwOnError:false})}catch(_){}});document.body.classList.add('ready')}
+setTimeout(()=>document.body.classList.add('ready'),7000);
+const q=$('q');
+q.addEventListener('input',()=>{
+  const v=q.value.trim().toLowerCase();let any=false;
+  document.querySelectorAll('#main section').forEach(sec=>{
+    let n=0;sec.querySelectorAll('.card').forEach(c=>{const m=!v||c.dataset.q.includes(v);c.style.display=m?'':'none';if(m)n++});
+    sec.style.display=n?'':'none';if(n)any=true;
+  });
+  $('empty').style.display=any?'none':'block';
+});
+document.addEventListener('keydown',ev=>{if(ev.key=='/'&&document.activeElement!==q){ev.preventDefault();q.focus()}});
+$('main').addEventListener('click',async ev=>{
+  const b=ev.target.closest('.cp');
+  if(!b){const c=ev.target.closest('.card');if(c&&document.body.classList.contains('study'))c.classList.toggle('show');return}
+  const t=L[b.dataset.i];
+  try{await navigator.clipboard.writeText(t)}catch(_){const a=document.createElement('textarea');a.value=t;document.body.appendChild(a);a.select();try{document.execCommand('copy')}catch(_){}a.remove()}
+  b.textContent='Copied ✓';b.classList.add('ok');setTimeout(()=>{b.textContent='Copy LaTeX';b.classList.remove('ok')},1400);
+});
+$('qz').addEventListener('click',()=>{const on=document.body.classList.toggle('study');$('qz').classList.toggle('on',on);document.querySelectorAll('.card.show').forEach(c=>c.classList.remove('show'))});
+$('th').addEventListener('click',()=>{
+  const r=document.documentElement,dark=r.dataset.theme=='dark';
+  r.dataset.theme=dark?'light':'dark';
+});
+const links=[...document.querySelectorAll('#nav a')];
+const spy=new IntersectionObserver(es=>es.forEach(en=>{if(en.isIntersecting){links.forEach(a=>a.classList.toggle('on',a.dataset.s==en.target.id));const a=links.find(a=>a.classList.contains('on'));if(innerWidth<=900&&a)$('nav').scrollTo({left:a.offsetLeft-20,behavior:'smooth'})}}),{rootMargin:'-25% 0px -65% 0px'});
+document.querySelectorAll('#main section').forEach(s=>spy.observe(s));
+const cio=new IntersectionObserver(es=>es.forEach(en=>{if(en.isIntersecting){en.target.classList.add('in');cio.unobserve(en.target)}}),{rootMargin:'0px 0px -6% 0px'});
+document.querySelectorAll('.card').forEach(c=>cio.observe(c));
+addEventListener('scroll',()=>{const d=document.documentElement;$('pg').style.transform=`scaleX(${d.scrollTop/(d.scrollHeight-d.clientHeight||1)})`},{passive:true});
+function widgets(){
+  const ab={basic:'Basic',trig:'Trig',hyper:'Hyper',invtrig:'Inv T',invhyp:'Inv H',ident:'Ident'},mx=Math.max(...S.map(s=>s.items.length)),top=S.findIndex(s=>s.items.length==mx);
+  $('bars').innerHTML=S.map((s,i)=>`<a href="#${s.id}" class="${i==top?'hi':''}"><i style="--v:${s.items.length/mx}" data-n="${s.items.length}"></i><span>${ab[s.id]||s.id}</span></a>`).join('');
+  $('bars').addEventListener('mouseover',ev=>{const a=ev.target.closest('a');if(a)$('bars').querySelectorAll('a').forEach(x=>x.classList.toggle('hi',x==a))});
+  $('ring').innerHTML=`<svg viewBox="0 0 140 140"><defs><mask id="mk"><circle cx="70" cy="70" r="58" fill="none" stroke="#fff" stroke-width="16" stroke-dasharray="250 400" transform="rotate(-90 70 70)"/></mask><filter id="g2"><feGaussianBlur stdDeviation="2.4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><circle cx="70" cy="70" r="58" fill="none" stroke="#3b3166" stroke-width="9" stroke-dasharray="1.3 3.9"/><circle cx="70" cy="70" r="58" fill="none" stroke="#b58cff" stroke-width="9" stroke-dasharray="1.3 3.9" mask="url(#mk)" filter="url(#g2)"/><text x="70" y="74" text-anchor="middle" class="rn">${total}</text><text x="70" y="92" text-anchor="middle" class="rl">formulas</text></svg>`;
+  const W=320,H=200,N=30;let p='';
+  for(let k=0;k<N;k++){const z=k/(N-1),y0=46+z*128;let d='';
+    for(let i=0;i<=70;i++){const t=i/70,pk=Math.exp(-Math.pow((t-.42)/.17,2))*105+Math.exp(-Math.pow((t-.74)/.12,2))*56,n=Math.sin(t*21+k*.7)*5+Math.sin(t*47+k*1.9)*3;
+      d+=(i?'L':'M')+(t*W).toFixed(1)+' '+(y0-pk*(1-z*.55)-n*(1-z*.4)).toFixed(1)}
+    p+=`<path d="${d}L${W} ${H+30}L0 ${H+30}Z" fill="#0d0919" stroke="none"/><path d="${d}" style="opacity:${(.3+z*.7).toFixed(2)}"/>`}
+  $('ter').innerHTML=`<svg viewBox="0 0 ${W} ${H}"><defs><filter id="g3"><feGaussianBlur stdDeviation="1.6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><g fill="none" stroke="#a78bfa" stroke-width="1.15" filter="url(#g3)">${p}</g></svg>`;
+  const FEAT=String.raw`Logarithmic§Spot u and u′ inside the integral§\displaystyle\int\frac{u'}{u}\,dx=\ln|u|+c
+Trigonometric§Match the pattern, then integrate§\displaystyle\int u'\sin(u)\,dx=-\cos(u)+c
+Inverse forms§Look for a² ± u² under the root§\displaystyle\int\frac{u'}{a^2+u^2}\,dx=\frac{1}{a}\tan^{-1}\left(\frac{u}{a}\right)+c`.split('\n').map(l=>l.split('§'));
+  let fi=0;const show=()=>{const f=FEAT[fi];$('ft').textContent=f[0];$('fs').textContent=f[1];$('fm').dataset.t=f[2];if(window.katex)katex.render(f[2],$('fm'),{throwOnError:false})};
+  $('fp').onclick=()=>{fi=(fi+FEAT.length-1)%FEAT.length;show()};$('fn').onclick=()=>{fi=(fi+1)%FEAT.length;show()};show();
+  $('qz2').onclick=()=>$('qz').click();
+}
+let dp;addEventListener('beforeinstallprompt',ev=>{ev.preventDefault();dp=ev;$('ins').hidden=false});
+$('ins').addEventListener('click',async()=>{if(dp){dp.prompt();await dp.userChoice;dp=null;$('ins').hidden=true}});
+if('serviceWorker' in navigator)addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));
+</script>
+</body>
+</html>
